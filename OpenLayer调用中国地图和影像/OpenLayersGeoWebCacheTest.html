@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+    <style>
+        html, body, #map {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+6666623
+
+<div id="map" class="map"></div>
+<p>666666666666666666</p>
+<script>
+    // alert(222)
+    var layers = [
+        new ol.layer.Tile({
+            source: new ol.source.TileWMS({
+                // url: 'http://localhost:8080/geoserver/gwc/service/wms',
+
+                // url: "http://localhost:8080/geoserver/xf/wms",// 中国地图
+                // url: "http://localhost:8080/geoserver/xuefei/wms",// 影像图调用
+                url: "http://localhost:8080/geowebcache/service/wms",// GeoWebCache瓦片图调用
+                params: {
+                    // 'LAYERS': 'xf:zggg',// 中国地图
+                    // 'LAYERS': 'xuefei:LC08_L1GT_122044',// 影像图调用
+                    'LAYERS': 'fsRoads',// GeoWebCache瓦片图调用
+                    'FORMAT': 'image/png',
+                    'SRS': 'EPSG:3857',
+                    'VERSION': '1.1.1'
+                },
+                tileGrid: new ol.tilegrid.TileGrid({
+                    //resolution和conf.xml中保持一致
+                    resolutions: [156543.34701473496, 78271.67350736761, 39135.836753683805, 19567.918376841768, 9783.9591884210186,
+                        4891.9795942103756, 2445.9897971051878,1222.9948985527262, 611.49744927636311, 305.74872463804934,
+                        152.87436231902467, 76.437181159512335, 38.218590579756167, 19.109295289878084, 9.5546476449390418,
+                        4.7773238226018124, 2.3886619113009062, 1.1943309555181612, 0.59716547789137242],
+                    tileSize: [256, 256],
+                    origin: [-20037508.342787001, 20037508.342787001]
+                })
+            })
+        })
+        /*new ol.layer.Tile({
+            source: new ol.source.OSM()
+        })*/
+    ];
+
+    var map = new ol.Map({
+        controls: [],
+        layers: layers,
+        target: 'map',
+        view: new ol.View({
+            projection: 'EPSG:3857',
+            center: [12506022.5544, 2672010.281],
+            //resolution:5.9486525145757E-4,
+            zoom: 7
+            //center: [113.234,23.456],
+            //zoom: 10,
+            //projection:'EPSG:4326'
+        })
+    });
+    //	alert(22666)
+</script>
+</body>
+
+
+</html>

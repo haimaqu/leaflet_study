@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>TileLayer 调用4490 的影像</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css"/>
+    <script src="https://js.arcgis.com/4.15/"></script>
+
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/FeatureLayer", "esri/layers/TileLayer", "esri/Basemap"
+        ], function (Map, MapView, FeatureLayer, TileLayer, Basemap) {
+            // var map = new Map({
+            //     basemap: "hybrid",
+            // });
+
+            var layer = new TileLayer({
+                url: "https://localhost:6443/arcgis/rest/services/MyMapService4/MapServer"
+                // url:"https://localhost:6443/arcgis/rest/services//WGS_1984_DEM_suggest/MapServer",// 参考系是WGS84可以显示的DEM
+                // url:"https://192.168.10.120:6443/arcgis/rest/services/cuiheng/cuiheng_DEM_render_CGCS2000/MapServer"
+
+                // url: "https://localhost:6443/arcgis/rest/services//cuiheng18%E7%BA%A766/MapServer",
+                // url: "https://localhost:6443/arcgis/rest/services/cuiheng18%E7%BA%A766/MapServer",
+                // 下面是 WGS_1984_Web_Mercator_Auxiliary_Sphere 投影坐标系 ,可以显示
+                // url: "https://localhost:6443/arcgis/rest/services//WGS_1984_DEM_suggest/MapServer"
+
+            });
+
+            // var basemap = new Basemap({
+            //     baseLayers: [layer]
+            // });
+            // var map = new Map({
+            //     basemap: basemap
+            // });
+
+            // 参考坐标系不一样，不可以在一起显示
+            var map = new Map({
+                // basemap: "oceans",
+                layers: [layer]
+            });
+
+
+
+            var view = new MapView({
+                container: "viewDiv",
+                map: map,
+                zoom: 7,
+                center: [118, 31.46]
+            });
+            // map.add(featureLayer);
+        });
+    </script>
+</head>
+
+<body>
+<div id="viewDiv"></div>
+</body>
+</html>

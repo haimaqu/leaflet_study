@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaflet调用中国地图和影像图</title>
+
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+    <script src="lib/leaflet/leaflet-src.js"></script>
+    <script src="lib/leaflet/leaflet.ChineseTmsProviders.js"></script>
+    <script src="lib/leaflet/leaflet.TileLayer.WMTS-master/leaflet-tilelayer-wmts-src.js"></script>
+    <!-- div必须设置高度 -->
+    <style>
+        #map {
+            height: calc(100vh);
+            width: 100%;
+
+        }
+    </style>
+
+</head>
+<body onload="initMap()">
+<div id="map"></div>
+<!-- leaflet里经度和纬度是反着的 -->
+<script>
+    function initMap() {
+
+        // 案例1
+        // function initMap() {
+        //     var map = L.map("map", {
+        //         center: [39.910864, 116.481736],
+        //         zoom: 9
+        //     });
+        //     // var map = L.map('map').setView([39.910864,116.481736],9)
+        //
+        //     L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',{
+        //         // L.tileLayer('http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}',{
+        //         attribution:'',
+        //         maxZoom:18,
+        //         subdomains: ['1', '2', '3', '4']
+        //     }).addTo(map)
+        // }
+
+        // 案列2
+        // /**
+        // * 智图地图内容
+        // */
+        // var normalm1 = L.tileLayer.chinaProvider('Geoq.Normal.Map', {
+        //     maxZoom: 18,
+        //     minZoom: 5
+        // });
+        // var normalm2 = L.tileLayer.chinaProvider('Geoq.Normal.Color', {
+        //     maxZoom: 18,
+        //     minZoom: 5
+        // });
+        // var normalm3 = L.tileLayer.chinaProvider('Geoq.Normal.PurplishBlue', {
+        //     maxZoom: 18,
+        //     minZoom: 5
+        // });
+        // var normalm4 = L.tileLayer.chinaProvider('Geoq.Normal.Gray', {
+        //     maxZoom: 18,
+        //     minZoom: 5
+        // });
+        // var normalm5 = L.tileLayer.chinaProvider('Geoq.Normal.Warm', {
+        //     maxZoom: 18,
+        //     minZoom: 5
+        // });
+        // var normalm6 = L.tileLayer.chinaProvider('Geoq.Normal.Cold', {
+        //     maxZoom: 18,
+        //     minZoom: 5
+        // });
+        // /**
+        //  * 天地图内容
+        //  */
+        // var normalm = L.tileLayer.chinaProvider('TianDiTu.Normal.Map', {
+        //         maxZoom: 18,
+        //         minZoom: 5
+        //     }),
+        //     normala = L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion', {
+        //         maxZoom: 18,
+        //         minZoom: 5
+        //     }),
+        //     imgm = L.tileLayer.chinaProvider('TianDiTu.Satellite.Map', {
+        //         maxZoom: 18,
+        //         minZoom: 5
+        //     }),
+        //     imga = L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion', {
+        //         maxZoom: 18,
+        //         minZoom: 5
+        //     });
+        //
+        // var normal = L.layerGroup([normalm, normala]),
+        //     image = L.layerGroup([imgm, imga]);
+        // /**
+        //  * 谷歌
+        //  */
+        // var normalMap = L.tileLayer.chinaProvider('Google.Normal.Map', {
+        //         maxZoom: 18,
+        //         minZoom: 5
+        //     }),
+        //     satelliteMap = L.tileLayer.chinaProvider('Google.Satellite.Map', {
+        //         maxZoom: 18,
+        //         minZoom: 5
+        //     });
+        // /**
+        //  * 高德地图
+        //  */
+        // var Gaode = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {
+        //     maxZoom: 18,
+        //     minZoom: 5
+        // });
+        // var Gaodimgem = L.tileLayer.chinaProvider('GaoDe.Satellite.Map', {
+        //     maxZoom: 18,
+        //     minZoom: 5
+        // });
+        // var Gaodimga = L.tileLayer.chinaProvider('GaoDe.Satellite.Annotion', {
+        //     maxZoom: 18,
+        //     minZoom: 5
+        // });
+        // var Gaodimage = L.layerGroup([Gaodimgem, Gaodimga]);
+        //
+        //
+        //
+        // var baseLayers = {
+        //     "智图地图": normalm1,
+        //     // "智图多彩": normalm2,
+        //     "智图午夜蓝": normalm3,
+        //     "智图灰色": normalm4,
+        //     "智图暖色": normalm5,
+        //     "智图冷色": normalm6,
+        //     "天地图": normal,
+        //     "天地图影像": image,
+        //     "谷歌地图": normalMap,
+        //     "谷歌影像": satelliteMap,
+        //     "高德地图": Gaode,
+        //     "高德影像": Gaodimage,
+        //
+        // }
+        //
+        // var map = L.map("map", {
+        //     center: [31.59, 120.29],
+        //     zoom: 12,
+        //     layers: [normalm1],
+        //     zoomControl: false
+        // });
+        //
+        // L.control.layers(baseLayers, null).addTo(map);
+        // L.control.zoom({
+        //     zoomInTitle: '放大',
+        //     zoomOutTitle: '缩小'
+        // }).addTo(map);
+
+
+        // 案列3
+        var map = L.map('map', {
+            center: [22.620234, 113.231233],
+            zoom: 5
+        });
+        var ssss = "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/tiger%3Apoi@EPSG%3A4326@png";
+
+        var ssssss = "http://localhost:8080/geoserver/schemas/wms/1.3.0/capabilities_1_3_0.xsd";
+
+        var ss = "http://localhost:8080/geoserver/gwc/service/tms";
+        var sd = "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/tiger:poi@EPSG:4326@png";
+
+        var tt = "http://localhost:8080/geoserver/gwc/demo/xf:xf?gridSet=EPSG:3857&format=image/png";
+        // http://localhost:8080/geoserver/schemas/wms/1.3.0/capabilities_1_3_0.xsd
+        // http://localhost:8080/geoserver/gwc/demo/wms?
+
+        // 如果  var sasd ="http://localhost:8080/geoserver/wms" ， 则L.tileLayer.wms(sasd, { 下的 sasd 就不用换了
+        var tsat = "http://localhost:8080/geoserver/xuefei/wms";// 影像图
+        var sasd = "http://localhost:8080/geoserver/xf/wms";// 中国地图
+
+        var geowebcache = "http://localhost:8080/geowebcache/service/wms";// GeoWebCache瓦片图调用
+
+        var nexrad = L.tileLayer.wms(sasd, {
+            // layers: 'xuefei:LC08_L1GT_122044',// 影像图
+            layers: 'xf:zggg',// 中国地图
+            // layers: 'fsRoads',// GeoWebCache瓦片图调用
+            format: 'image/png',
+            transparent: true,
+            attribution: "Weather data © 2012 IEM Nexrad"
+        }).addTo(map);
+
+
+        // var nexrad = L.tileLayer.wms("http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi", {
+        //     layers: 'nexrad-n0r-900913',
+        //     format: 'image/png',
+        //     transparent: true,
+        //     attribution: "Weather data © 2012 IEM Nexrad"
+        // }).addTo(map);
+
+
+        // 案列4
+        // // http://localhost:8080/geoserver/gwc/demo/xf:xf?gridSet=EPSG:3857&format=image/png
+        // var wmsLayer = L.tileLayer.wms('http://localhost:8080/geoserver/gwc/demo/xf:xf/wms?', {
+        //     layers: 'xf:xf',
+        // }).addTo(map);
+        // L.control.scale({maxWidth: 150}).addTo(map);
+        // L.marker([31.320234, 118.231233]).addTo(map);
+        // L.circle([31.360234, 118.131233], {
+        //     color: 'red',
+        //     fillColor: '#f03',
+        //     fillOpacity: 0.5,
+        //     radius: 500
+        // }).addTo(map);
+        // L.polygon([
+        //     [31.320234, 118.230233],
+        //     [31.321234, 118.229233],
+        //     [31.322234, 118.233233]
+        // ]).addTo(map);
+
+        // 案例5
+        // var emap_url = 'http://t0.tianditu.com/vec_c/wmts';
+        // var emapanno_url = 'http://t0.tianditu.com/cva_c/wmts';
+        // var img_url = 'http://t0.tianditu.com/img_c/wmts';
+        // var imganno_url = 'http://t0.tianditu.com/cia_c/wmts';
+        //
+        // //电子地图
+        // var emap_layer = new L.TileLayer.WMTS(emap_url,
+        //     {
+        //         tileSize: 256,
+        //         layer: 'vec',
+        //         style: "default",
+        //         tilematrixSet: "c",
+        //         format: "tile",
+        //         //attribution: "<a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy; <a href='http://www.ign.fr'>IGN</a>"
+        //     }
+        // );
+        // //电子地图注记
+        // var emapanno_layer = new L.TileLayer.WMTS(emapanno_url,
+        //     {
+        //         tileSize: 256,
+        //         layer: 'cva',
+        //         style: "default",
+        //         tilematrixSet: "c",
+        //         format: "tile",
+        //         //attribution: "<a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy; <a href='http://www.ign.fr'>IGN</a>"
+        //     }
+        // );
+        // //影像地图
+        // var img_layer = new L.TileLayer.WMTS(img_url,
+        //     {
+        //         tileSize: 256,
+        //         layer: 'img',
+        //         style: "default",
+        //         tilematrixSet: "c",
+        //         format: "tile",
+        //         //attribution: "<a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy; <a href='http://www.ign.fr'>IGN</a>"
+        //     }
+        // );
+        // //影像地图注记
+        // var imganno_layer = new L.TileLayer.WMTS(imganno_url,
+        //     {
+        //         tileSize: 256,
+        //         layer: 'cia',
+        //         style: "default",
+        //         tilematrixSet: "c",
+        //         format: "tile",
+        //         //attribution: "<a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy; <a href='http://www.ign.fr'>IGN</a>"
+        //     }
+        // );
+        // var map = L.map('map', {crs: L.CRS.EPSG4326, center: {lon: 112, lat: 40}, zoom: 13})
+        // var dlgLayer = L.layerGroup().addLayer(emap_layer, emapanno_layer);
+        // var imgLayer = L.layerGroup().addLayer(img_layer, imganno_layer);
+        // map.addLayer(dlgLayer);
+        // map.addLayer(imgLayer);
+
+    }
+
+
+</script>
+
+
+</body>
+</html>
